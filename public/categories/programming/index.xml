@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Programming on Shubham&#39;s Space</title>
+    <link>//localhost:1313/categories/programming/</link>
+    <description>Recent content in Programming on Shubham&#39;s Space</description>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mastering Python Decorators: A Practical Guide</title>
+      <link>//localhost:1313/posts/python_decorator/</link>
+      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/python_decorator/</guid>
+      <description>&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://cdn-images-1.medium.com/max/800/1*qcCumGkylxKlUFdhpSrGjg.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
+&lt;p&gt;As Python developers, we’re always searching for ways to write more efficient, clean, and maintainable code. Enter decorators — a powerful Python feature that allows you to modify or enhance functions without changing their core implementation. In this article, we’ll dive deep into decorators through a real-world performance monitoring example.&lt;/p&gt;
+&lt;h3 id=&#34;what-are-decorators&#34;&gt;What Are Decorators?&lt;/h3&gt;
+&lt;p&gt;At its core, a decorator is a function that takes another function as an input and extends or modifies its behaviour. Think of it like a wrapper that can add functionality to existing code without modifying the original function.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

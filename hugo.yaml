@@ -4,11 +4,12 @@ title: Shubham's Space
 theme: ["PaperMod"]
 
 params:
+  ShowReadingTime: true
   homeInfoParams:
     Title: Hi!
     Content: |
       A little about me—I’m a Software Engineer who builds scalable, reliable apps—basically, I make sure things don’t crash (often). When I’m not coding, I’m geeking out over space, history, bikes, music, and yelling at cricket matches. Always learning, always curious, occasionally funny.
-    ReadMoreLink: "/about/" # Replace "/about/" with the actual URL of your full content page
+    ReadMoreLink: "/about/"
     ReadMoreText: "Read more..."
 
   socialIcons: # optional
@@ -27,3 +28,8 @@ menu:
       name: archives
       url: /archives/
       weight: 20
+    - identifier: categories
+      name: categories
+      url: /categories/
+      weight: 30
+
