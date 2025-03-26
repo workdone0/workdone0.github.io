@@ -1,4 +1,29 @@
-baseURL: https://example.org/
+baseURL: ""
 languageCode: en-us
-title: My New Hugo Site
+title: Shubham's Space
 theme: ["PaperMod"]
+
+params:
+  homeInfoParams:
+    Title: Hi!
+    Content: |
+      A little about me—I’m a Software Engineer who builds scalable, reliable apps—basically, I make sure things don’t crash (often). When I’m not coding, I’m geeking out over space, history, bikes, music, and yelling at cricket matches. Always learning, always curious, occasionally funny.
+    ReadMoreLink: "/about/" # Replace "/about/" with the actual URL of your full content page
+    ReadMoreText: "Read more..."
+
+  socialIcons: # optional
+    - name: github
+      url: https://github.com/workdone0
+    - name: linkedin
+      url: https://www.linkedin.com/in/shubham-kumar-0199/
+
+menu:
+  main:
+    - identifier: about
+      name: about
+      url: /about/
+      weight: 10
+    - identifier: archives
+      name: archives
+      url: /archives/
+      weight: 20
