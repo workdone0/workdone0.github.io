@@ -4,7 +4,6 @@ title: Shubham's Space
 theme: ["PaperMod"]
 
 params:
-  ShowReadingTime: true
   homeInfoParams:
     Title: Hi!
     Content: |
