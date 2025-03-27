@@ -5,7 +5,7 @@ theme: ["PaperMod"]
 
 params:
   homeInfoParams:
-    Title: 'नमस्ते'
+    Title: 'नमस्ते,'
     Content: |
       A little about me—I’m a Software Engineer who builds scalable, reliable apps—basically, I make sure things don’t crash (often). When I’m not coding, I’m geeking out over space, history, bikes, music, and yelling at cricket matches. Always learning, always curious, occasionally funny.
     ReadMoreLink: "/about/"
