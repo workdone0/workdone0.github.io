@@ -5,7 +5,7 @@ title: 'Shores of the cosmic ocean'
 params:
   author: Shubham
 summary: 'The known is finite, the unknown infinite; intellectually we stand on an islet in the midst of an illimitable ocean of inexplicability. Our business in every generation is to reclaim a little more land.'
-tags: ["cosmos", "carl sagan", "space"]
+tags: ["cosmos", "space"]
 categories: ["astronomy"]
 ---
 
