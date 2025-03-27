@@ -1,6 +1,14 @@
 ---
 draft: false
 title: 'About'
+disableShare: true
+disableHLJS: false
+hideSummary: false
+searchHidden: true
+ShowReadingTime: false
+ShowBreadCrumbs: false
+ShowPostNavLinks: false
+ShowWordCount: false
 ---
 
 First and foremost, I love writing code. I still remember sitting in front of an old school computer, making it print "Hello, Shubham" for the first time. It was a tiny program, barely a few lines, but to me, it felt like I had just unlocked a secret superpower. From that moment on, I was hooked—obsessed with the idea that I could write something and watch a machine bring it to life (sometimes exactly as intended, sometimes in ways that made me question everything).
