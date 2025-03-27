@@ -11,7 +11,7 @@ params:
     ReadMoreLink: "/about/"
     ReadMoreText: "Read more..."
 
-  socialIcons: # optional
+  socialIcons:
     - name: github
       url: https://github.com/workdone0
     - name: linkedin
@@ -32,3 +32,6 @@ menu:
       url: /categories/
       weight: 30
 
+caches:
+  images:
+    dir: :cacheDir/images
