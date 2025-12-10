@@ -1,0 +1,34 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseHead from "../components/BaseHead.astro";
+import { getCollection } from 'astro:content';
+import ProjectGallery from '../components/ProjectGallery.astro';
+
+const projects = await getCollection('projects');
+projects.sort((a, b) => {
+  // Sort by pubDate if available, or just keeping default order
+  if (a.data.pubDate && b.data.pubDate) {
+      return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  }
+  return 0;
+});
+---
+
+<html lang="en">
+    <head>
+        <BaseHead title="Projects" description="Software projects and tools." />
+    </head>
+    <body class="w-full max-w-screen-md mx-auto my-4 dark:bg-neutral-800 dark:text-neutral-300 transition-colors duration-300">
+        <Header />
+        <main class="flex flex-col gap-8 px-4 md:px-0">
+            <div class="mb-12">
+                <img src="/images/projects-hero.png" alt="Oil painting of vintage ship building" class="w-full h-64 md:h-80 object-cover rounded-2xl shadow-lg mb-8" />
+                <h1 class="text-4xl font-bold">Projects</h1>
+            </div>
+            <ProjectGallery projects={projects} />
+        </main>
+        <Footer />
+    </body>
+</html>
+

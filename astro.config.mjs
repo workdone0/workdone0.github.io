@@ -6,15 +6,16 @@ import tailwind from '@astrojs/tailwind'
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://arsaev.github.io/art-void',
-    integrations: [mdx(), sitemap(), tailwind()],
-    markdown: {
-        shikiConfig: {
-          themes: {
-            light: 'poimandres',
-            dark: 'catppuccin-latte',
-          },
-        },
+  site: 'https://workdone0.github.io',
+  base: '/',
+  integrations: [tailwind(), mdx(), sitemap()],
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'poimandres',
+        dark: 'catppuccin-latte',
       },
-    
+    },
+  },
+
 })

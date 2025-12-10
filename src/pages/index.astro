@@ -3,70 +3,303 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import RecentPublications from "../components/RecentPublications.astro";
-import { getCollection } from 'astro:content';
-import ArtGallery from '../components/ArtGallery.astro';
-const artItems = await getCollection('art');
+import { Icon } from 'astro-iconify';
 
-function slugify(str) {
-  return str ? str.toLowerCase().replace(/\s+/g, '-') : '';
-}
-const selectedMedium = 'All';
-const mediums = Array.from(new Set(artItems.map(a => a.data.medium).filter(Boolean)));
-mediums.unshift('All');
-
-artItems.sort((a, b) => {
-  if (a.data.year !== b.data.year) return b.data.year - a.data.year;
-  return b.data.month - a.data.month;
-});
-
-// short by 20 most recent
-artItems.splice(20);
+const skills = [
+  "Python", "Backend & APIs", "Distributed Systems",
+  "Data Processing", "Infrastructure", "Observability"
+];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
-  <body class="w-full max-w-screen-md mx-auto my-4 dark:bg-neutral-800 dark:text-neutral-300 transition-colors duration-300" >
+  <body class="w-full max-w-screen-md mx-auto my-4 dark:bg-neutral-800 dark:text-neutral-300 transition-colors duration-300">
     <Header />
-    <main class="flex flex-col justify-center">
-      <div class="px-4 md:px-16 flex flex-col gap-4 md:my-10">
-        <h1 class="text-2xl md:text-5xl w-full">🎨 Hello, Artist!</h1>
-        <p class="w-full text-justify text-base md:text-lg">
-          Welcome to <strong>Art Void</strong> — a minimalistic theme for art portfolios and blogs. Showcase your creative work, share your artistic journey, and connect with fellow creators in a clean, elegant space designed for visual storytelling.
-        </p>
-      </div>
-      <div class="w-full flex flex-col items-center gap-2.5 px-4 lg:px-0 mt-6">
-        <img
-          src="/placeholder-about.jpg"
-          alt="Artistic inspiration"
-        />
+    <main class="flex flex-col justify-center px-4 md:px-0">
+      
+      {/* Hero Section */}
+      <section class="flex flex-col gap-6 md:my-10 mb-20 relative">
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <canvas id="hero-canvas" class="w-full h-full opacity-60 dark:opacity-50"></canvas>
+        </div>
         
-        <p class="italic text-xs text-gray-600 dark:text-neutral-400">
-         Photo by <a href="https://unsplash.com/@kharaoke?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Khara Woods</a> on <a href="https://unsplash.com/photos/assorted-color-paint-brush-on-brown-wooden-table-top-KR84RpMCb0w?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+        <script>
+          const canvas = document.getElementById('hero-canvas');
+          const ctx = canvas.getContext('2d');
+          
+          let width, height;
+          let stars = [];
+          let shootingStars = [];
+          
+          // Config
+          const starCount = 200;
+          const shootingStarFrequency = 0.01; // Chance per frame
+          
+          let mouse = { x: null, y: null };
+          
+          window.addEventListener('mousemove', (e) => {
+              const rect = canvas.getBoundingClientRect();
+              mouse.x = e.clientX - rect.left;
+              mouse.y = e.clientY - rect.top;
+          });
+          
+          window.addEventListener('mouseleave', () => {
+              mouse.x = null;
+              mouse.y = null;
+          });
+          
+          function isDarkMode() {
+              return document.documentElement.classList.contains('dark');
+          }
+
+          class Star {
+               constructor() {
+                   this.reset(true);
+               }
+               
+               reset(randomStart = false) {
+                   this.x = Math.random() * width;
+                   this.y = Math.random() * height;
+                   this.z = Math.random() * 2 + 0.5; // Depth
+                   this.size = Math.random() * 1.5;
+                   this.baseOpacity = Math.random() * 0.5 + 0.1;
+                   this.opacity = this.baseOpacity;
+                   this.brightness = 0;
+                   this.vx = (Math.random() - 0.5) * 0.2; // Tiny random drift
+                   this.vy = (Math.random() - 0.5) * 0.2; 
+               }
+               
+               update() {
+                   // Mouse influence (Parallax)
+                   if (mouse.x != null) {
+                       const dx = (mouse.x - width/2) * 0.02 * this.z;
+                       const dy = (mouse.y - height/2) * 0.02 * this.z;
+                       this.x -= dx * 0.1;
+                       this.y -= dy * 0.1;
+                   }
+                   
+                   this.x += this.vx;
+                   this.y += this.vy;
+                   
+                   // Brighten if mouse is close
+                   if (mouse.x != null) {
+                        const dx = mouse.x - this.x;
+                        const dy = mouse.y - this.y;
+                        const dist = Math.sqrt(dx*dx + dy*dy);
+                        if (dist < 100) {
+                            this.brightness = Math.min(this.brightness + 0.05, 1);
+                        } else {
+                            this.brightness = Math.max(this.brightness - 0.02, 0);
+                        }
+                   }
+                   
+                   // Wrap
+                   if (this.x < 0) this.x = width;
+                   if (this.x > width) this.x = 0;
+                   if (this.y < 0) this.y = height;
+                   if (this.y > height) this.y = 0;
+               }
+               
+               draw() {
+                   const finalOpacity = Math.min(1, this.opacity + this.brightness);
+                   const isDark = isDarkMode();
+                   
+                   // White in dark mode, Dark Blue/Gray in light mode
+                   const color = isDark ? '255, 255, 255' : '30, 41, 59';
+                   
+                   ctx.fillStyle = `rgba(${color}, ${finalOpacity})`;
+                   ctx.beginPath();
+                   ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                   ctx.fill();
+               }
+          }
+          
+          class ShootingStar {
+              constructor() {
+                  this.reset();
+              }
+              
+              reset() {
+                  this.x = Math.random() * width;
+                  this.y = Math.random() * height * 0.5; // Top half start
+                  this.len = Math.random() * 80 + 10;
+                  this.speed = Math.random() * 10 + 6;
+                  this.size = Math.random() * 1 + 0.1;
+                  // Shoot angle
+                  this.angle = Math.PI / 4 + (Math.random() - 0.5) * 0.5; // Roughly 45 degrees
+                  this.vx = Math.cos(this.angle) * this.speed;
+                  this.vy = Math.sin(this.angle) * this.speed;
+                  this.life = 1;
+                  this.opacity = 0;
+              }
+              
+              update() {
+                  this.x += this.vx;
+                  this.y += this.vy;
+                  this.life -= 0.01;
+                  
+                  // Fade in then out
+                  if (this.life > 0.9) {
+                      this.opacity += 0.1;
+                  } else {
+                      this.opacity -= 0.02;
+                  }
+                  
+                  if (this.life <= 0 || this.opacity <= 0) {
+                      this.reset();
+                      // Move out of view until respawn chance
+                      this.x = -100; 
+                      this.y = -100;
+                      this.vx = 0; 
+                      this.vy = 0;
+                  }
+              }
+              
+              draw() {
+                  if (this.opacity <= 0) return;
+                  
+                  const tailX = this.x - Math.cos(this.angle) * this.len;
+                  const tailY = this.y - Math.sin(this.angle) * this.len;
+                  
+                  const isDark = isDarkMode();
+                  const color = isDark ? '255, 255, 255' : '30, 41, 59';
+                  
+                  const gradient = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+                  gradient.addColorStop(0, `rgba(${color}, ${this.opacity})`);
+                  gradient.addColorStop(1, `rgba(${color}, 0)`);
+                  
+                  ctx.lineWidth = 2;
+                  ctx.lineCap = 'round';
+                  ctx.strokeStyle = gradient;
+                  ctx.beginPath();
+                  ctx.moveTo(tailX, tailY);
+                  ctx.lineTo(this.x, this.y);
+                  ctx.stroke();
+                  
+                  // Head glow
+                  ctx.fillStyle = `rgba(${color}, ${this.opacity})`;
+                  ctx.beginPath();
+                  ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+                  ctx.fill();
+              }
+          }
+          
+          function init() {
+              resize();
+              stars = [];
+              shootingStars = [];
+              for (let i = 0; i < starCount; i++) {
+                  stars.push(new Star());
+              }
+              animate();
+          }
+          
+          function resize() {
+              width = canvas.width = canvas.parentElement.offsetWidth;
+              height = canvas.height = canvas.parentElement.offsetHeight;
+          }
+          
+          function animate() {
+              ctx.clearRect(0, 0, width, height);
+              
+              stars.forEach(star => {
+                  star.update();
+                  star.draw();
+              });
+              
+              // Randomly spawn active shooting star
+              if (Math.random() < shootingStarFrequency) {
+                  shootingStars.push(new ShootingStar());
+              }
+              
+              // Filter out dead shooting stars
+              shootingStars = shootingStars.filter(s => s.life > 0 && s.opacity > 0);
+              
+              shootingStars.forEach(s => {
+                  s.update();
+                  s.draw();
+              });
+              
+              requestAnimationFrame(animate);
+          }
+          
+          window.addEventListener('resize', () => {
+              resize();
+              init();
+          });
+          
+          init();
+        </script>
+
+        <h1 class="text-4xl md:text-6xl font-bold leading-tight z-10">
+          Backend/Distributed systems engineer <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">building reliable software.</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl z-10 leading-relaxed">
+          Namaste, I’m Shubham. I work at the intersection of backend systems, scalability, and observability. I like building things that grow gracefully and don’t demand heroic late-night debugging (at least not on a regular basis).
         </p>
-      </div>
-      <div class="px-4 md:px-0 mt-10">
-      <section class="mb-8">
-        <h2 class="text-3xl font-bold mb-4">Most recent art</h2>
-        <ul class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {mediums.map(m => (
-            <li>
-              <a href={slugify(m) === 'all' ? '/art' : `/art/${slugify(m)}`}
-                class={`block p-3 rounded bg-gray-100 dark:bg-neutral-700 hover:bg-gray-200 dark:hover:bg-neutral-600 transition${selectedMedium === m ? ' ring-2 ring-blue-500' : ''}`}>
-                {m}
-              </a>
-            </li>
-          ))}
-        </ul>
+        
+        <div class="flex gap-4 mt-4 z-10">
+          <a href="/projects" class="px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-black font-semibold rounded-lg hover:opacity-90 transition">
+            View Projects
+          </a>
+          <a href="https://workdone0.substack.com" target="_blank" class="px-6 py-3 border border-neutral-300 dark:border-neutral-700 font-semibold rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition">
+            Read My Writing
+          </a>
+        </div>
       </section>
-      <ArtGallery artItems={artItems} />
-    </div>
-    <RecentPublications />
-        </main>
+
+      {/* Mini About */}
+      <section class="mb-20">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+           <Icon name="mdi:account-circle-outline" class="w-6 h-6" /> About Me
+        </h2>
+        <div class="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed">
+           <p>
+             With around 4 years of experience, I specialize in backend development and distributed systems. 
+             I prefer simple, debuggable designs over "clever" hacks and love diving deep into data-heavy problems.
+           </p>
+           <p>
+             When I'm not coding, you can find me tinkering with Raspberry Pis, watching cricket, exploring physics, or riding my bike.
+           </p>
+        </div>
+      </section>
+
+      {/* Skills / Tech Stack */}
+      <section class="mb-20">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+            <Icon name="mdi:code-tags" class="w-6 h-6" /> What I Work With
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {skills.map(skill => (
+                <div class="p-4 border dark:border-neutral-700 rounded-lg bg-neutral-50 dark:bg-neutral-800/50 hover:border-blue-500 transition cursor-default">
+                    <span class="font-medium">{skill}</span>
+                </div>
+            ))}
+        </div>
+      </section>
+
+      {/* Online Presence */}
+      <section class="mb-10">
+         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+            <Icon name="mdi:link-variant" class="w-6 h-6" /> Find me online
+        </h2>
+        <div class="flex gap-4 flex-wrap">
+            <a href="https://github.com/workdone0" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-neutral-800 rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition">
+                <Icon name="mdi:github" class="w-5 h-5" /> GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/shubham-kumar-0199/" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-neutral-800 rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition">
+                <Icon name="mdi:linkedin" class="w-5 h-5" /> LinkedIn
+            </a>
+            <a href="https://workdone0.substack.com" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-neutral-800 rounded hover:bg-gray-200 dark:hover:bg-neutral-700 transition">
+                <Icon name="mdi:fountain-pen-tip" class="w-5 h-5" /> Substack
+            </a>
+        </div>
+      </section>
+
+    </main>
     <Footer />
   </body>
 </html>
-

@@ -1,20 +1,56 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
-<Layout
-  title="About Me"
-  description="Artist, creator, and explorer of visual storytelling."
-  pubDate={new Date('August 08 2021')}
-  heroImage="/placeholder-about.jpg"
->
-  <p>
-	Hello! I'm an artist passionate about exploring the intersection of creativity and emotion. My work spans painting, digital art, and mixed media, each piece reflecting a unique journey and perspective.
-  </p>
-  <p>
-	Art, for me, is a way to connect with others and express the stories that words cannot capture. I find inspiration in nature, urban landscapes, and the everyday moments that often go unnoticed. Through my portfolio and blog, I share not only finished works but also sketches, thoughts, and the process behind each creation.
-  </p>
-  <p>
-	Thank you for visiting Art Void. I hope my work inspires you to see beauty in the ordinary and to pursue your own creative path.
-  </p>
-</Layout>
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <BaseHead title="About | Shubham" description="About Shubham - Backend Engineer" />
+  </head>
+  <body class="w-full max-w-screen-md mx-auto my-4 dark:bg-neutral-800 dark:text-neutral-300 transition-colors duration-300">
+    <Header />
+    <main class="px-4 md:px-0">
+      <div class="w-full h-80 rounded-2xl overflow-hidden mb-12 shadow-lg">
+        <img src="/images/about-hero.jpg" alt="Person sitting on rock near sea" class="w-full h-full object-cover">
+      </div>
+      <h1 class="text-4xl font-bold mb-8">Who I Am</h1>
+      
+      <div class="prose dark:prose-invert max-w-none leading-relaxed text-lg text-gray-700 dark:text-gray-300">
+        <p>
+          Hi, I’m <strong>Shubham</strong> 👋.
+        </p>
+        <p>
+          I'm a backend and distributed systems engineer with about 4 years of experience building software that (mostly) doesn't crash. I care deeply about reliability, observability, and making complex systems understandable.
+        </p>
+
+        <h3 class="font-bold mt-8 mb-4 text-xl">What I Work On</h3>
+        <p>
+          My work revolves around data-heavy systems and infrastructure. I prefer simple, boring architectures that are easy to debug over clever, complex ones that are "impressive" until they break at 3 AM. I believe developer experience is a feature, not an afterthought.
+        </p>
+
+        <h3 class="font-bold mt-8 mb-4 text-xl">How I Think About Software</h3>
+        <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Reliability First:</strong> If you can't trust it, it doesn't matter how fast it is.</li>
+            <li><strong>Observability:</strong> I want to know why it broke before the users do.</li>
+            <li><strong>Simplicity:</strong> Complexity is the enemy of maintenance.</li>
+        </ul>
+
+        <h3 class="font-bold mt-8 mb-4 text-xl">Interests</h3>
+        <p>
+          When I step away from the terminal, you'll likely find me:
+        </p>
+        <ul class="list-disc pl-5 space-y-2">
+            <li>🚴‍♂️ Riding my bike</li>
+            <li>🏏 Watching cricket (and yelling at the TV)</li>
+            <li>🌌 Reading about space and physics</li>
+            <li>🎵 Listening to music</li>
+            <li>🥧 Tinkering with Raspberry Pis and home automation</li>
+        </ul>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

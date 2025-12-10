@@ -1,0 +1,78 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import TagLink from "../components/TagLink.astro";
+import { Icon } from 'astro-iconify';
+
+type Props = CollectionEntry<"projects">["data"];
+
+const { title, description, heroImage, repo, url, tags } = Astro.props;
+---
+
+<html lang="en" class="dark">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body class="w-full max-w-screen-md mx-auto my-4 dark:bg-neutral-800 dark:text-neutral-300 transition-colors duration-300">
+    <Header />
+    <main>
+      <article class="px-4">
+        <header class="mb-8">
+            <div class="flex flex-col gap-4">
+                <h1 class="text-4xl md:text-5xl font-bold mb-2">{title}</h1>
+                <p class="text-xl text-gray-500 dark:text-gray-400">{description}</p>
+                
+                <div class="flex gap-4 mt-4">
+                    {repo && (
+                        <a href={repo} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-neutral-700 hover:bg-gray-200 dark:hover:bg-neutral-600 transition">
+                            <Icon name="mdi:github" class="w-5 h-5" />
+                            <span>GitHub</span>
+                        </a>
+                    )}
+                    {url && (
+                        <a href={url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-neutral-700 hover:bg-gray-200 dark:hover:bg-neutral-600 transition">
+                            <Icon name="mdi:web" class="w-5 h-5" />
+                            <span>Live Demo</span>
+                        </a>
+                    )}
+                </div>
+            </div>
+        </header>
+
+        {heroImage && (
+            <div class="mb-10 rounded-xl overflow-hidden shadow-lg border dark:border-neutral-700">
+                <img width={1020} height={510} src={heroImage} alt={title} class="w-full h-auto object-cover" />
+            </div>
+        )}
+
+        <div class="prose dark:prose-invert max-w-none mt-10">
+          <slot />
+        </div>
+
+        {tags && (
+            <div class="mt-12 pt-6 border-t dark:border-neutral-700">
+                <h3 class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wider">Technologies</h3>
+                <ul class="flex flex-wrap gap-2">
+                  {tags.map((tag) => (
+                    <li>
+                      <span class="px-3 py-1 bg-gray-100 dark:bg-neutral-700 rounded-full text-sm">{tag}</span>
+                    </li>
+                  ))}
+                </ul>
+            </div>
+        )}
+      </article>
+    </main>
+    <Footer />
+  </body>
+
+  <style is:inline>
+    /* Add basic prose styling overrides if needed */
+    img { max-width: 100%; height: auto; margin: 2rem 0; }
+    h1, h2, h3, h4, h5, h6 { font-weight: bold; margin-top: 2rem; margin-bottom: 1rem; }
+    p { margin-bottom: 1rem; line-height: 1.7; }
+    ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+  </style>
+</html>
