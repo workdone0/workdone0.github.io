@@ -1,31 +1,41 @@
 ---
 import { Icon } from 'astro-iconify'
 
-import {
-  Astronav,
-  MenuItems,
-  MenuIcon,
-} from "astro-navbar";
+
 import ThemeIcon from "./ThemeIcon.astro";
 ---
 
 <header class="lg:flex py-4 pt-2 px-4 sm:px-6 xl:px-0 md:pt-10 gap-5 mb-10 lg:mb-28 w-full">
-  <Astronav>
-    <div class="flex w-full justify-between items-end border-b lg:border-none pb-4 lg:pb-0">
-      <a class="font-semibold text-xl flex gap-2 items-center group" href="/">Shubham</a>
-      <div class="lg:hidden flex items-center justify-center gap-4">
-        <MenuIcon class="w-4 h-4 text-gray-800 dark:text-neutral-300" />
-		<ThemeIcon class="w-10" />
-      </div>
+  <div class="flex w-full justify-between items-end border-b lg:border-none pb-4 lg:pb-0">
+    <a class="font-semibold text-xl flex gap-2 items-center group" href="/">Shubham</a>
+    <div class="lg:hidden flex items-center justify-center gap-4">
+      <ThemeIcon class="w-10" />
+      <button id="menu-toggle" class="text-gray-800 dark:text-neutral-300 focus:outline-none">
+        <Icon name="mdi:menu" class="w-6 h-6" />
+      </button>
     </div>
-    <MenuItems class="hidden lg:flex">
-      <ul class="flex flex-col lg:flex-row lg:gap-5 gap-3 mt-3 lg:mt-0  pb-4 lg:pb-0 border-b border-neutral-400 lg:border-b-0">
-        <li class="flex items-center"><a href="/about">About</a></li>
-        <li class="flex items-center"><a href="/projects">Projects</a></li>
-        <li class="flex items-center"><a href="https://workdone0.substack.com">Writing</a></li>
+  </div>
+  
+  <nav id="mobile-menu" class="hidden lg:flex w-full lg:w-auto">
+    <ul class="flex flex-col lg:flex-row lg:gap-5 gap-3 mt-3 lg:mt-0 pb-4 lg:pb-0 border-b border-neutral-400 lg:border-b-0 w-full">
+      <li class="flex items-center"><a href="/about" class="hover:text-blue-500 transition-colors">About</a></li>
+      <li class="flex items-center"><a href="/projects" class="hover:text-blue-500 transition-colors">Projects</a></li>
+      <li class="flex items-center"><a href="https://workdone0.substack.com" class="hover:text-blue-500 transition-colors">Writing</a></li>
 
-		  <ThemeIcon class="w-10 hidden lg:flex" />
-      </ul>
-    </MenuItems>
-  </Astronav>
+      <li class="hidden lg:flex items-center">
+         <ThemeIcon class="w-10" />
+      </li>
+    </ul>
+  </nav>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+  </script>
 </header>

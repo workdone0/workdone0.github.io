@@ -44,7 +44,7 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
       return localStorage.getItem("theme");
     }
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
+      return "light"; // Forced default to light even on dark systems as per user request
     }
     return "light";
   })();
