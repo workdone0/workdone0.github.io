@@ -1,4 +1,4 @@
-# Portfolio - Shubham Kumar
+# Portfolio
 
 This is the source code for my personal portfolio website, built with [Astro](https://astro.build/) and based on the [Art Void](https://github.com/Arsaev/art-void) theme.
 
@@ -27,4 +27,4 @@ npm run build
 This project is open source and available under the [MIT License](LICENSE).
 The underlying theme is "Art Void" by Arsaev/Void Astro.
 
-&copy; 2024 Shubham Kumar
+&copy; 2025 Shubham Kumar
