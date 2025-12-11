@@ -1,0 +1,88 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { Icon } from 'astro-iconify';
+
+const SITE_TITLE = "Writing | Shubham";
+const SITE_DESCRIPTION = "Selected essays on culture, truth, and the cosmos.";
+
+const posts = [
+  {
+    title: "What the National Anthem?",
+    desc: "Behind every anthem lies a narrative. Using NLP and clustering to surface how countries express values like devotion, land, and democracy through their words.",
+    link: "https://workdone0.substack.com/p/national-anthem",
+    date: "Culture & Code"
+  },
+  {
+    title: "The Cost of Lies",
+    desc: "Every lie we tell ourselves—about our history, our neighbors, our ideals—demands a hidden tribute. Unpacking the stakes of self-deception in politics and memory.",
+    link: "https://workdone0.substack.com/p/cost-of-lies",
+    date: "Truth & Society"
+  },
+  {
+    title: "You, Still",
+    desc: "A reflection on Richard Feynman’s letter to his late wife. Exploring how love persists in absence—raw, quiet, and defying the finality of death.",
+    link: "https://workdone0.substack.com/p/feynman-letter",
+    date: "Personal Philosophy"
+  },
+  {
+    title: "Shores of the Cosmic Ocean",
+    desc: "Reflecting on our place in the vast universe. Earth is but a tiny 'shore' in the ocean of the cosmos, yet our curiosity drives us to explore what lies beyond.",
+    link: "https://workdone0.substack.com/p/cosmos",
+    date: "Perspective"
+  }
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body class="w-full max-w-screen-md mx-auto my-4 dark:bg-neutral-800 dark:text-neutral-300 transition-colors duration-300">
+    <Header />
+    <main class="flex flex-col justify-center px-4 md:px-0">
+      
+      <div class="w-full h-80 rounded-2xl overflow-hidden mb-12 shadow-lg mt-8">
+        <img src="/images/writings-hero.png" alt="Oil painting of an open book on a wooden desk" class="w-full h-full object-cover">
+      </div>
+
+      <div class="mb-12">
+        <h1 class="text-4xl font-bold mb-4 text-neutral-900 dark:text-white">Writing</h1>
+        <p class="text-lg text-neutral-600 dark:text-neutral-400">
+            Selected essays from my Substack.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-10">
+        {posts.map((post) => (
+            <a href={post.link} target="_blank" class="group block">
+                <div class="flex flex-col gap-2">
+                    <div class="flex items-center justify-between">
+                         <span class="text-sm font-mono text-blue-600 dark:text-blue-400 uppercase tracking-wider">{post.date}</span>
+                         <Icon name="mdi:arrow-top-right" class="w-5 h-5 text-neutral-400 group-hover:text-blue-500 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                    </div>
+                    <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        {post.title}
+                    </h2>
+                    <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg">
+                        {post.desc}
+                    </p>
+                </div>
+            </a>
+        ))}
+      </div>
+      
+      <div class="mt-20 pt-10 border-t border-neutral-200 dark:border-neutral-800 text-center">
+          <p class="text-neutral-500 mb-6">Read more on...</p>
+          <a href="https://workdone0.substack.com" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-[#FF6719] text-white font-bold rounded-lg hover:opacity-90 transition">
+              <Icon name="bi:substack" class="w-5 h-5" />
+              <span>Substack</span>
+          </a>
+      </div>
+
+    </main>
+    <Footer />
+  </body>
+</html>
