@@ -3,7 +3,7 @@ title: Twig
 description: A modern terminal-based JSON explorer that makes huge, nested data actually usable. Fast, local, and privacy-first.
 repo: https://github.com/workdone0/twig
 tags: ["Python", "Textual", "TUI", "JSON", "CLI"]
-heroImage: "" 
+heroImage: ""
 pubDate: 2025-12-01
 ---
 

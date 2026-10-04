@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "sync:writings": "node scripts/sync-writings.mjs",
+    "test:rss": "node --test scripts/sync-writings.test.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.8.1",
@@ -20,6 +22,7 @@
     "astro-iconify": "^1.2.0",
     "astro-navbar": "^2.3.2",
     "clsx": "^2.1.1",
+    "fast-xml-parser": "^4.5.7",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5"

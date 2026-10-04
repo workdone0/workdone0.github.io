@@ -2,7 +2,7 @@
 #
 # To get started with Astro see: https://docs.astro.build/en/getting-started/
 #
-name: Deploy Astro site to Pages
+name: Refresh writings and deploy site
 
 on:
   # Runs on pushes targeting the default branch
@@ -66,6 +66,19 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         working-directory: ${{ env.BUILD_PATH }}
+      - name: Restore saved articles
+        uses: actions/cache/restore@v4
+        with:
+          path: src/data/writings.json
+          key: writings-v1-${{ github.run_id }}
+          restore-keys: writings-v1-
+      - name: Refresh Substack articles
+        run: npm run sync:writings
+      - name: Save articles for future builds
+        uses: actions/cache/save@v4
+        with:
+          path: src/data/writings.json
+          key: writings-v1-${{ github.run_id }}
       - name: Build with Astro
         run: |
           ${{ steps.detect-package-manager.outputs.runner }} astro build \

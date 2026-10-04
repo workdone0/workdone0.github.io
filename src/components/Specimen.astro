@@ -1,0 +1,135 @@
+---
+import FeynmanStory from "./FeynmanStory.astro";
+---
+
+<details class="flower-disclosure" id="flower-story">
+  <summary class="specimen" aria-label="Why a flower? Read the Feynman passage">
+    <span class="specimen-top">
+      <span class="eyebrow">A flower, and a closer look</span>
+      <span aria-hidden="true">Fig. 01</span>
+    </span>
+    <svg
+      viewBox="0 0 460 400"
+      role="img"
+      aria-labelledby="flower-title"
+      class="flower-art"
+    >
+      <title id="flower-title">A botanical flower illustration with an optional view of its underlying geometry</title>
+      <defs>
+        <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+          <circle cx="1" cy="1" r=".7" fill="#7e8c76" opacity=".23" />
+        </pattern>
+      </defs>
+      <rect width="460" height="400" fill="url(#dots)" />
+      <g class="flower-stem" fill="none" stroke="#536650" stroke-width="2">
+        <path d="M228 189 C214 247 251 296 225 374" />
+        <path
+          d="M233 296 C201 294 170 265 162 240 C204 243 228 263 233 296Z"
+          fill="#bac4a9"
+        />
+        <path
+          d="M233 320 C266 309 285 276 287 258 C254 263 237 284 233 320Z"
+          fill="#a9b798"
+        />
+        <path d="M163 241L232 295 M286 259L235 318" stroke-width="1" />
+      </g>
+      <g transform="translate(227 165)" stroke="#65775e" stroke-width="1.2">
+        {Array.from({ length: 13 }, (_, i) => (
+          <ellipse
+            cx="0"
+            cy="-54"
+            rx="22"
+            ry="59"
+            transform={`rotate(${(i * 360) / 13})`}
+            fill={i % 2 ? "#d9dfc7" : "#e6e7d4"}
+            fill-opacity=".88"
+          />
+        ))}
+        <circle r="33" fill="#9aa682" />
+        {Array.from({ length: 100 }, (_, i) => {
+          const a = i * 2.39996;
+          const r = 2.8 * Math.sqrt(i);
+          return (
+            <circle
+              cx={Math.cos(a) * r}
+              cy={Math.sin(a) * r}
+              r="1.65"
+              fill="#4d604a"
+              stroke="none"
+            />
+          );
+        })}
+      </g>
+      <g class="structure" fill="none" stroke="#8b634d" stroke-width="1">
+        <circle cx="227" cy="165" r="115" stroke-dasharray="3 5" />
+        <circle cx="227" cy="165" r="65" />
+        <path d="M90 165H365 M227 28V301" stroke-dasharray="3 5" />
+        <path d="M264 120L325 67H402 M258 188L337 220H410" />
+        <text
+          x="323"
+          y="58"
+          fill="#715340"
+          stroke="none"
+          font-size="11"
+          font-family="monospace"
+        >
+          form & pattern
+        </text>
+        <text
+          x="336"
+          y="238"
+          fill="#715340"
+          stroke="none"
+          font-size="11"
+          font-family="monospace"
+        >
+          a closer look
+        </text>
+      </g>
+      <text
+        x="26"
+        y="367"
+        font-family="Georgia,serif"
+        font-style="italic"
+        font-size="16"
+        fill="#62715b"
+      >
+        Inspired by Feynman’s flower.
+      </text>
+    </svg>
+    <span class="specimen-bottom">
+      <span class="flower-caption">There’s a story behind this.</span>
+      <span class="flower-invitation">
+        Why a flower? <span class="disclosure-sign" aria-hidden="true"></span>
+      </span>
+    </span>
+  </summary>
+  <div class="flower-story prose">
+    <h2>About that flower.</h2>
+    <p>
+      This is probably the closest someone else has come to explaining how I
+      feel about things.
+    </p>
+    <FeynmanStory />
+    <p>
+      I like that understanding something doesn’t have to take away the feeling.
+      You can enjoy a song and wonder how it was made. You can look at the sky
+      and want to understand what’s out there. For me, the questions are part of
+      the enjoyment.
+    </p>
+    <button type="button" class="text-link flower-close">
+      ↑ Back to the flower
+    </button>
+  </div>
+</details>
+<script>
+  const story = document.querySelector<HTMLDetailsElement>("#flower-story");
+  story?.classList.add("is-enhanced");
+  const close = story?.querySelector<HTMLButtonElement>(".flower-close");
+  close?.addEventListener("click", () => {
+    if (!story) return;
+    story.open = false;
+    story.querySelector("summary")?.focus({ preventScroll: true });
+    story.scrollIntoView({ block: "nearest", behavior: "instant" });
+  });
+</script>

@@ -1,140 +1,207 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import { Icon } from 'astro-iconify';
-
-const skills = [
-  "Python", "Backend & APIs", "Distributed Systems",
-  "Data Processing", "Infrastructure", "Observability"
-];
+import SiteLayout from "../layouts/SiteLayout.astro";
+import BotanicalSketch from "../components/BotanicalSketch.astro";
+import FeynmanStory from "../components/FeynmanStory.astro";
+import { writings, formatPostDate } from "../data/writings";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body class="w-full max-w-screen-md mx-auto my-4 dark:bg-neutral-800 dark:text-neutral-300 transition-colors duration-300">
-    <Header />
-    <main class="flex flex-col justify-center px-4 md:px-0">
-      
-      {/* Hero Section */}
-      <section class="flex flex-col gap-6 md:my-10 mb-20 relative">
-
-        <script>
-            const greetings = [
-                "Hello",
-                "नमस्ते",
-                "Bonjour",
-                "Hallo",
-                "こんにちは"
-            ];
-            
-            const typingSpeed = 150;
-            const deletingSpeed = 75;
-            const pauseTime = 2500;
-            
-            const greetingElement = document.getElementById('typing-greeting');
-            
-            let greetingIndex = 0;
-            let charIndex = greetings[0].length;
-            let isDeleting = false;
-            
-            function type() {
-                const currentGreeting = greetings[greetingIndex];
-                
-                if (isDeleting) {
-                    greetingElement.textContent = currentGreeting.substring(0, charIndex - 1);
-                    charIndex--;
-                } else {
-                    greetingElement.textContent = currentGreeting.substring(0, charIndex + 1);
-                    charIndex++;
-                }
-                
-                let nextSpeed = isDeleting ? deletingSpeed : typingSpeed;
-                
-                if (!isDeleting && charIndex === currentGreeting.length) {
-                    // Finished typing word
-                    nextSpeed = pauseTime;
-                    isDeleting = true;
-                } else if (isDeleting && charIndex === 0) {
-                    // Finished deleting word
-                    isDeleting = false;
-                    greetingIndex = (greetingIndex + 1) % greetings.length;
-                    nextSpeed = 500;
-                }
-                
-                setTimeout(type, nextSpeed);
-            }
-            
-            // Start
-            document.addEventListener('DOMContentLoaded', () => {
-                // Set initial state to full word and start deleting after delay
-                isDeleting = true;
-                if(greetingElement) setTimeout(type, 1500);
-            });
-        </script>
-
-        <h1 class="text-3xl md:text-6xl font-bold leading-tight z-10">
-          Backend/Distributed systems engineer <span class="text-neutral-500 dark:text-neutral-400">building reliable software.</span>
-        </h1>
-        <p class="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl z-10 leading-relaxed">
-          <span id="typing-greeting" class="inline-block border-r-2 border-neutral-800 dark:border-neutral-200 pr-1 animate-pulse">Hello</span>, I’m Shubham, a backend engineer specializing in distributed systems. I build software that scales without hiccups.
-        </p>
-        
-        <div class="flex gap-4 mt-4 z-10">
-          <a href="/projects" class="px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-black font-semibold rounded-lg hover:opacity-90 transition">
-            View Projects
-          </a>
-          <a href="https://workdone0.substack.com" target="_blank" class="px-6 py-3 border border-neutral-300 dark:border-neutral-700 font-semibold rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition">
-            Read My Writing
-          </a>
+<SiteLayout>
+  <section class="introduction">
+    <div class="intro-copy">
+      <p class="small-label">Hello, I’m</p>
+      <h1>
+        Shubham<span class="name-period">.</span>
+      </h1>
+      <p class="intro-lead">I write code. I like understanding things.</p>
+      <p>
+        Physics, astronomy, maths, computers, and everything in between. I don’t
+        really have favourites. Almost anything gets interesting if you look
+        deep enough.
+      </p>
+      <a class="quiet-link" href="/about">
+        More about me <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <BotanicalSketch />
+  </section>
+  <section class="shelf-section" aria-labelledby="shelf-title">
+    <div class="section-heading">
+      <h2 id="shelf-title">A few things to open</h2>
+      <span class="small-label">Pick something.</span>
+    </div>
+    <div class="shelf">
+      <a class="shelf-item" href="/projects/twig">
+        <div class="object-stage">
+          <div class="mini-terminal" aria-hidden="true">
+            <div class="terminal-top">
+              <i></i>
+              <i></i>
+              <i></i>
+              <span>twig</span>
+            </div>
+            <div class="terminal-lines">
+              <span>❯ twig response.json</span>
+              <span>▾ data</span>
+              <span>　├─ ideas</span>
+              <span>　└─ something useful_</span>
+            </div>
+          </div>
         </div>
-      </section>
-
-
-
-      <div class="grid md:grid-cols-2 gap-12 mb-20">
-          {/* Skills / Tech Stack */}
-          <section>
-            <h2 class="text-xl font-semibold mb-4 text-neutral-900 dark:text-neutral-100">
-                 The Stack
-            </h2>
-            <div class="flex flex-wrap gap-3">
-                {skills.map(skill => (
-                    <span class="px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800 text-sm text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">
-                        {skill}
-                    </span>
-                ))}
+        <div class="item-caption">
+          <span class="small-label">Something I made</span>
+          <h3>
+            Twig <span>↗</span>
+          </h3>
+          <p>A way to stop getting lost in JSON.</p>
+        </div>
+      </a>
+      <a class="shelf-item" href="/about#music" data-dialog="music-dialog">
+        <div class="object-stage">
+          <div class="record-sleeve" aria-hidden="true">
+            <span class="sleeve-label">WORDS & MUSIC</span>
+            <div class="record">
+              <span></span>
             </div>
-          </section>
-
-          {/* Online Presence */}
-          <section>
-             <h2 class="text-xl font-semibold mb-4 text-neutral-900 dark:text-neutral-100">
-                 Connect
-            </h2>
-            <div class="flex flex-col gap-3">
-                <a href="https://github.com/workdone0" target="_blank" class="flex items-center gap-3 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition group">
-                    <Icon name="mdi:github" class="w-5 h-5 group-hover:scale-110 transition-transform" /> 
-                    <span>GitHub</span>
-                </a>
-                <a href="https://www.linkedin.com/in/shubham-kumar-0199/" target="_blank" class="flex items-center gap-3 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition group">
-                    <Icon name="mdi:linkedin" class="w-5 h-5 group-hover:scale-110 transition-transform" /> 
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://workdone0.substack.com" target="_blank" class="flex items-center gap-3 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition group">
-                    <Icon name="mdi:fountain-pen-tip" class="w-5 h-5 group-hover:scale-110 transition-transform" /> 
-                    <span>Substack</span>
-                </a>
-            </div>
-          </section>
+            <span class="sleeve-note">No single favourite.</span>
+          </div>
+        </div>
+        <div class="item-caption">
+          <span class="small-label">Something I like</span>
+          <h3>
+            A good line <span>↗</span>
+          </h3>
+          <p>A lot of feeling. A few words.</p>
+        </div>
+      </a>
+      <a class="shelf-item" href="https://workdone0.substack.com/p/cosmos">
+        <div class="object-stage">
+          <div class="space-print" aria-hidden="true">
+            <span class="print-top">A SMALL PERSPECTIVE</span>
+            <svg viewBox="0 0 180 150" fill="none">
+              <ellipse
+                cx="90"
+                cy="77"
+                rx="75"
+                ry="31"
+                transform="rotate(-25 90 77)"
+                stroke="#a8b3a7"
+              />
+              <circle cx="90" cy="77" r="30" fill="#647867" />
+              <path d="M90 47C61 58 61 99 90 107" stroke="#b9c5b6" />
+              <path
+                d="M66 61C84 72 99 71 114 61M63 87C82 98 98 97 117 86"
+                stroke="#94a38f"
+              />
+              <circle cx="151" cy="53" r="4" fill="#bbc4af" />
+              <path d="M30 24v8m-4-4h8M142 116v6m-3-3h6" stroke="#abb8a4" />
+            </svg>
+            <span class="print-bottom">Shores of the Cosmic Ocean</span>
+          </div>
+        </div>
+        <div class="item-caption">
+          <span class="small-label">Something I wrote</span>
+          <h3>
+            A little perspective <span>↗</span>
+          </h3>
+          <p>On space, and our place in it.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+  <section class="home-writing" aria-labelledby="writing-title">
+    <div class="section-heading">
+      <div>
+        <h2 id="writing-title">A little more reading</h2>
+        <p>I write on Substack. The subjects vary.</p>
       </div>
-
-    </main>
-    <Footer />
-  </body>
-</html>
-
+      <a class="quiet-link" href="/writings">
+        All writing ↗
+      </a>
+    </div>
+    <div class="reading-list">
+      {writings.slice(0, 3).map((post) => (
+        <a href={post.url}>
+          <span>{post.title}</span>
+          <time class="reading-topic" datetime={post.date}>{formatPostDate(post.date)}</time>
+          <span aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+  <div class="last-note">
+    <p>“Interest trumps experience.”</p>
+    <span>Probably the simplest way to explain me.</span>
+  </div>
+  <dialog id="thought-dialog" aria-labelledby="thought-title">
+    <div class="dialog-bar">
+      <span class="small-label">Something I agree with</span>
+      <form method="dialog">
+        <button aria-label="Close passage">
+          Close <span aria-hidden="true">×</span>
+        </button>
+      </form>
+    </div>
+    <div class="dialog-reading">
+      <h2 id="thought-title">The beauty of a flower.</h2>
+      <p class="dialog-intro">
+        I like the idea that understanding something can make you appreciate it
+        more. This passage says it better than I can.
+      </p>
+      <FeynmanStory />
+    </div>
+  </dialog>
+  <dialog id="music-dialog" aria-labelledby="music-title">
+    <div class="dialog-bar">
+      <span class="small-label">Music</span>
+      <form method="dialog">
+        <button aria-label="Close music note">Close ×</button>
+      </form>
+    </div>
+    <div class="dialog-reading music-note">
+      <h2 id="music-title">It’s often the lyrics.</h2>
+      <p>
+        I listen to a wide variety of music. I don’t have one favourite song or
+        artist.
+      </p>
+      <p>
+        But good lyrics tend to get me. There’s something beautiful about
+        communicating the most complicated feeling in a few words.
+      </p>
+      <p>
+        That’s probably what I like most about music: someone finds the words
+        for something that’s hard to explain.
+      </p>
+    </div>
+  </dialog>
+</SiteLayout>
+<script>
+  const openers = new WeakMap<HTMLDialogElement, HTMLAnchorElement>();
+  for (const trigger of document.querySelectorAll<HTMLAnchorElement>(
+    "[data-dialog]",
+  )) {
+    const dialog = document.getElementById(
+      trigger.dataset.dialog ?? "",
+    ) as HTMLDialogElement | null;
+    if (!dialog || typeof dialog.showModal !== "function") continue;
+    trigger.setAttribute("aria-haspopup", "dialog");
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      openers.set(dialog, trigger);
+      dialog.showModal();
+    });
+    dialog.addEventListener("click", (event) => {
+      if (event.target !== dialog) return;
+      const rect = dialog.getBoundingClientRect();
+      if (
+        event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom
+      )
+        dialog.close();
+    });
+    dialog.addEventListener("close", () => {
+      if (openers.get(dialog) === trigger) trigger.focus({ preventScroll: true });
+    });
+  }
+</script>

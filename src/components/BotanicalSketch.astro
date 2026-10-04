@@ -1,0 +1,48 @@
+<a class="botanical-sketch" href="/about#feynman" data-dialog="thought-dialog" aria-label="Read Feynman’s passage on the beauty of a flower">
+  <svg viewBox="0 0 340 320" fill="none" aria-hidden="true">
+    <defs>
+      <radialGradient id="botanical-wash">
+        <stop stop-color="#b9bb94" stop-opacity=".22" />
+        <stop offset="1" stop-color="#b9bb94" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+    <ellipse cx="177" cy="162" rx="133" ry="143" fill="url(#botanical-wash)" />
+    <g stroke="#a59476" stroke-width=".65" opacity=".45">
+      <path d="M173 26v265M68 105h217" stroke-dasharray="2 6" />
+      <path d="M239 197h38m-10-4 10 4-10 4M84 246h31" />
+      <circle cx="175" cy="106" r="65" stroke-dasharray="1 7" />
+    </g>
+    <g class="plant-lines" stroke="#6e7955" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <path pathLength="1" d="M166 288C170 248 191 208 181 161L175 120" />
+      <path pathLength="1" d="M179 213C144 207 117 186 109 157C143 155 176 177 179 213Z" fill="#829069" fill-opacity=".07" />
+      <path pathLength="1" d="M178 214C156 194 135 176 109 157M152 191l-21-1m33 13-3-23M139 179l-7-15" stroke-width=".7" />
+      <path pathLength="1" d="M176 246C207 241 231 217 234 190C202 194 180 214 176 246Z" fill="#829069" fill-opacity=".08" />
+      <path pathLength="1" d="M177 245C196 225 212 207 234 190M197 225l20-4m-9-9 1-14" stroke-width=".7" />
+      <path pathLength="1" d="M182 173C203 160 215 145 216 131M212 138c-11-6-13-17-8-24 13 0 21 8 17 17-2 5-5 7-9 7Z" />
+    </g>
+    <g class="petal-lines" stroke="#9b7e61" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round">
+      <path pathLength="1" d="M166 95C140 75 144 45 160 41C177 36 190 64 180 93C198 61 222 60 228 76C235 93 212 111 187 109C216 110 227 133 214 145C200 158 178 139 177 118C173 146 151 160 139 145C127 130 145 113 163 109C136 117 113 102 119 87C126 70 151 80 166 95Z" fill="#c3a986" fill-opacity=".06" />
+      <path pathLength="1" d="M168 89l-9-33M189 100l26-19M186 118l20 18M166 122l-19 18M153 101l-23-7" stroke-width=".6" opacity=".65" />
+      <path pathLength="1" d="M185 103C190 117 168 125 163 112C156 96 181 90 185 103Z" fill="#a38b5e" fill-opacity=".16" />
+      <path pathLength="1" d="M170 103l2 2m7-3-1 3m-10 5 2 1m8 3 1-2m-5-3 1 1" stroke-width="1.8" />
+    </g>
+    <g fill="#8b806a" font-family="Georgia, serif" font-style="italic" font-size="10" opacity=".7">
+      <text x="259" y="188">a closer look</text>
+      <text x="87" y="280">fig. 01</text>
+    </g>
+  </svg>
+  <span class="botanical-caption">The beauty of a flower <span aria-hidden="true">↗</span></span>
+</a>
+<style>
+  .botanical-sketch { display: block; min-width: 0; width: 100%; color: var(--muted); }
+  .botanical-sketch svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .botanical-caption { display: block; text-align: center; font-size: 11px; margin-top: 4px; }
+  .botanical-caption span { display: inline-block; margin-left: 6px; }
+  .botanical-sketch:hover .botanical-caption { color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .plant-lines path, .petal-lines path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.8s ease-out forwards; }
+    .petal-lines path { animation-delay: .5s; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+  }
+  @media (max-width: 520px) { .botanical-sketch { max-width: 290px; justify-self: center; } }
+</style>

@@ -1,37 +1,8 @@
----
-import { Icon } from "astro-iconify";
-
-const today = new Date();
----
-
-<footer class="mt-20 md:mt-36 mx-4">
-  <div class="flex gap-4 border-b pb-8 mb-5 flex-col lg:flex-row justify-between">
-    <div class="w-full lg:w-2/3">
-      <h1 class="text-lg font-bold">Shubham</h1>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 max-w-md">
-        Building reliable backend systems and exploring distributed architectures.
-      </p>
-      <div class="flex gap-3 mt-4">
-        <a href="https://github.com/workdone0" target="_blank" aria-label="GitHub">
-          <Icon name="radix-icons:github-logo" class="w-5 h-5 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition"/>
-        </a>
-        <a href="https://www.linkedin.com/in/shubham-kumar-0199/" target="_blank" aria-label="LinkedIn">
-          <Icon name="radix-icons:linkedin-logo" class="w-5 h-5 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition"/>
-        </a>
-      </div>
-    </div>
-    
-    <div class="flex flex-col gap-2 mt-6 lg:mt-0">
-        <h2 class="font-bold text-base">Sitemap</h2>
-        <ul class="flex flex-col gap-2 text-sm text-gray-600 dark:text-gray-400">
-          <li><a href="/" class="hover:underline">Home</a></li>
-          <li><a href="/about" class="hover:underline">About</a></li>
-          <li><a href="/projects" class="hover:underline">Projects</a></li>
-          <li><a href="https://workdone0.substack.com" class="hover:underline">Writing</a></li>
-        </ul>
-    </div>
+<footer class="site-footer shell">
+  <span>© {new Date().getFullYear()} Shubham Kumar</span>
+  <div>
+    <a href="https://github.com/workdone0">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/shubham-kumar-0199/">LinkedIn ↗</a>
+    <a href="https://workdone0.substack.com/">Substack ↗</a>
   </div>
-  <p class="text-sm text-gray-500 dark:text-gray-500 mb-10 text-center lg:text-left">
-    &copy; {today.getFullYear()} Shubham. All rights reserved.
-  </p>
 </footer>

@@ -1,56 +1,79 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import FeynmanStory from "../components/FeynmanStory.astro";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title="About | Shubham" description="About Shubham - Backend Engineer" />
-  </head>
-  <body class="w-full max-w-screen-md mx-auto my-4 dark:bg-neutral-800 dark:text-neutral-300 transition-colors duration-300">
-    <Header />
-    <main class="px-4 md:px-0">
-      <div class="w-full h-80 rounded-2xl overflow-hidden mb-12 shadow-lg mt-8">
-        <img src="/images/about-hero.jpg" alt="Person sitting on rock near sea" class="w-full h-full object-cover">
-      </div>
-      <h1 class="text-4xl font-bold mb-8 text-neutral-900 dark:text-white">Who I Am</h1>
-      
-      <div class="prose dark:prose-invert max-w-none leading-relaxed text-lg text-neutral-700 dark:text-neutral-300">
-        <p>
-          Hi, I’m <strong>Shubham</strong> 👋.
-        </p>
-        <p>
-          I'm a backend and distributed systems engineer with about 4 years of experience building software that (mostly) doesn't crash. I care deeply about reliability, observability, and making complex systems understandable.
-        </p>
-
-        <h3 class="font-bold mt-8 mb-4 text-xl">What I Work On</h3>
-        <p>
-          My work revolves around data-heavy systems and infrastructure. I prefer simple, boring architectures that are easy to debug over clever, complex ones that are "impressive" until they break at 3 AM. I believe developer experience is a feature, not an afterthought.
-        </p>
-
-        <h3 class="font-bold mt-8 mb-4 text-xl">How I Think About Software</h3>
-        <ul class="list-disc pl-5 space-y-2">
-            <li><strong>Reliability First:</strong> If you can't trust it, it doesn't matter how fast it is.</li>
-            <li><strong>Observability:</strong> I want to know why it broke before the users do.</li>
-            <li><strong>Simplicity:</strong> Complexity is the enemy of maintenance.</li>
-        </ul>
-
-        <h3 class="font-bold mt-8 mb-4 text-xl">Interests</h3>
-        <p>
-          When I step away from the terminal, you'll likely find me:
-        </p>
-        <ul class="list-disc pl-5 space-y-2">
-            <li>🚴‍♂️ Riding my bike</li>
-            <li>🏏 Watching cricket (and yelling at the TV)</li>
-            <li>🌌 Reading about space and physics</li>
-            <li>🎵 Listening to music</li>
-            <li>🥧 Tinkering with Raspberry Pis and home automation</li>
-        </ul>
-      </div>
-    </main>
-    <Footer />
-  </body>
-</html>
+<SiteLayout
+  title="About — Shubham Kumar"
+  description="A little about me: writing code, solving problems, music, physics, and the things I’m interested in."
+>
+  <section class="page-intro">
+    <h1>About me.</h1>
+    <p>
+      I’m Shubham. I like solving problems and understanding how things work.
+    </p>
+  </section>
+  <div class="prose">
+    <p>
+      I spend a lot of time writing code. I enjoy it, but the part I like most
+      is working out how to solve a problem. Software is where I’ve had the most
+      practice. In most other things, I’m happy to be learning.
+    </p>
+    <p>
+      Physics, astronomy, maths, computers—I’m interested in all of them, and in
+      the things that connect them. I don’t really have favourites. Almost
+      anything becomes interesting once you look at it closely enough.
+    </p>
+    <p>
+      I’d probably call myself a jack of all trades. “Interest trumps
+      experience” sums up how I feel about that. Not knowing much about
+      something doesn’t put me off wanting to understand it.
+    </p>
+    <h2 id="music">Away from code</h2>
+    <p>
+      I like riding my bike and listening to music. My taste in music is fairly
+      broad, but I’m especially drawn to good lyrics. There’s something
+      beautiful about expressing a complicated feeling in just a few words.
+    </p>
+    <p>
+      I write as well. The subjects vary: national anthems, the stories we tell
+      ourselves, space, a letter from Feynman to his wife. My{" "}
+      <a href="/writings">essays</a> are probably a better introduction to that
+      side of me than a list of interests.
+    </p>
+    <p>
+      My favourite painter is Leonardo da Vinci. I admire his art, but also the
+      fact that he was good at so many other things. That breadth of interest is
+      a big part of why I like him.
+    </p>
+    <p>
+      As for things that get on my nerves: a lack of common sense. I wish it
+      were a little more common.
+    </p>
+    <section id="feynman" class="feynman-note">
+      <h2>Feynman says this well</h2>
+      <p>
+        There’s a passage about a flower that captures something I believe. You
+        can appreciate how beautiful it is and want to understand the cells, the
+        colours, and the processes behind it. Learning about one doesn’t take
+        away from the other.
+      </p>
+      <p>
+        That’s how I feel about a lot of things. Understanding them gives me
+        more to enjoy.
+      </p>
+      <details>
+        <summary>
+          Read the passage <span aria-hidden="true">+</span>
+        </summary>
+        <FeynmanStory />
+      </details>
+    </section>
+    <p class="about-links">
+      You can find my writing on{" "}
+      <a href="https://workdone0.substack.com/">Substack</a>, my code on{" "}
+      <a href="https://github.com/workdone0">GitHub</a>, and my work history on{" "}
+      <a href="https://www.linkedin.com/in/shubham-kumar-0199/">LinkedIn</a>.
+    </p>
+  </div>
+</SiteLayout>

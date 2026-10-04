@@ -1,0 +1,25 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import MarginSketches from "../components/MarginSketches.astro";
+import Footer from "../components/Footer.astro";
+const {
+  title = "Shubham Kumar — My personal website",
+  description = "Hi, I’m Shubham. I write code, enjoy solving problems, and am interested in bikes, music, space, and a lot of other things.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <Header />
+    <main id="main" class="shell">
+      <slot />
+    </main>
+    <MarginSketches />
+    <Footer />
+  </body>
+</html>
